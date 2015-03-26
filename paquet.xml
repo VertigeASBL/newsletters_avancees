@@ -19,6 +19,7 @@
   <licence>GNU/GPL</licence>
 
   <necessite nom="newsletters" />
+  <necessite nom="saisie_liste" />
 
   <pipeline nom="declarer_tables_auxiliaires" inclure="base/newsletters_avancees.php" />
 

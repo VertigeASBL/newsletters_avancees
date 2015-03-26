@@ -1,0 +1,29 @@
+[(#ID_NEWSLETTER|oui)
+	[(#AUTORISER{modifier,newsletter,#ID_NEWSLETTER}|sinon_interdire_acces)]
+][(#ID_NEWSLETTER|non)
+	[(#AUTORISER{creer,newsletter}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_NEWSLETTER}|?{#ENV{lier_trad,#ID_NEWSLETTER}|generer_url_entite{newsletter},#URL_ECRIRE{#VAL{newsletter}|objet_info{table_objet}}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_NEWSLETTER|oui)
+	[(#GET{redirect}|icone_verticale{[(#VAL{newsletter}|objet_info{texte_retour}|_T)],#VAL{newsletter}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#VAL{newsletter}|objet_info{#ID_NEWSLETTER|?{texte_modifier,texte_creer}}|_T)]
+		<h1>(#ENV*{titre,#INFO_TITRE{newsletter,#ID_NEWSLETTER}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_NEWSLETTER|generer_url_entite{newsletter}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_{editer_newsletter_avancee,#ENV{id_newsletter,oui},#GET{redirect}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>

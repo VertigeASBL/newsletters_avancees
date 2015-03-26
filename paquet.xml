@@ -18,6 +18,8 @@
 
   <licence>GNU/GPL</licence>
 
+  <necessite nom="newsletters" />
 
+  <pipeline nom="declarer_tables_auxiliaires" inclure="base/newsletters_avancees.php" />
 
 </paquet>

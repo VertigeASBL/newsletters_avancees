@@ -57,6 +57,25 @@ function formulaires_editer_newsletter_avancee_charger_dist ($id_newsletter='new
 }
 
 /**
+ * Vérifications du formulaire d'édition des newsletters avancées
+ *
+ * Vérifier les champs postés et signaler d'éventuelles erreurs
+ *
+ * @return array
+ *     Tableau des erreurs
+ */
+function formulaires_editer_newsletter_avancee_verifier_dist ($id_newsletter='new', $retour='') {
+
+    if (saisies_liste_verifier('selection_editoriale'))
+        return array();
+
+    $erreurs = array();
+
+    return $erreurs;
+}
+
+
+/**
  * Traitement du formulaire d'édition des newsletters avancées
  *
  * Traiter les champs postés
@@ -66,10 +85,29 @@ function formulaires_editer_newsletter_avancee_charger_dist ($id_newsletter='new
  */
 function formulaires_editer_newsletter_avancee_traiter_dist ($id_newsletter='new', $retour='') {
 
-    $retour = array(
-        'editable' => 'oui',
-        'message_ok' => 'ok',
-    );
+    if (saisies_liste_traiter('selection_editoriale'))
+        return array('editable' => 'oui');
+
+    include_spip('action/editer_liens');
+
+    $traiter = charger_fonction('traiter', 'formulaires/editer_newsletter');
+    $retour = $traiter($id_newsletter, $retour);
+
+    if ($id_newsletter === 'new') {
+        $id_newsletter = $retour['id_newsletter'];
+    }
+
+    /* Pas besoin de défaire d'éventuels liens existants, puisque la
+       fonction traiter du formulaire d'édition de newsletters de base
+       s'en charge déjà */
+    $selection_editoriale = _request('selection_editoriale');
+
+    foreach ($selection_editoriale as $i => $article) {
+        $id_article = str_replace('article|', '', $article['article'][0]);
+        objet_associer(array('newsletter' => $id_newsletter),
+                       array('article' => $id_article),
+                       array('rang' => $i));
+    }
 
     return $retour;
 }

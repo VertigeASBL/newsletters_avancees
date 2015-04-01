@@ -20,7 +20,6 @@ function formulaires_editer_newsletter_avancee_saisies_dist ($id_newsletter='new
                     'saisie' => 'selecteur_article',
                     'options' => array(
                         'nom' => 'article',
-                        'label' => _T('newsletters_avancees:label_article'),
                     ),
                 ),
             ),

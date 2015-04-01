@@ -57,22 +57,6 @@ function formulaires_editer_newsletter_avancee_charger_dist ($id_newsletter='new
 }
 
 /**
- * Vérifications du formulaire d'édition des newsletters avancées
- *
- * Vérifier les champs postés et signaler d'éventuelles erreurs
- *
- * @return array
- *     Tableau des erreurs
- */
-function formulaires_editer_newsletter_avancee_verifier_dist ($id_newsletter='new', $retour='') {
-
-    $erreurs = array();
-
-    return $erreurs;
-
-}
-
-/**
  * Traitement du formulaire d'édition des newsletters avancées
  *
  * Traiter les champs postés

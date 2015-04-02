@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'explication_selection_editoriale' => "Cliquez sur \"modifier\" pour choisir un article à inclure dans l'info-lettre",
 
     // L
-    'label_article' => "Article à inclure",
+    'label_article' => "Article",
     'label_selection_editoriale' => "Sélection éditoriale",
     'label_titre' => "Titre du bloc",
     'label_avant_propos' => "Avant-propos",

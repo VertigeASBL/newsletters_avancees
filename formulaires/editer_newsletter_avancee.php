@@ -46,7 +46,11 @@ function formulaires_editer_newsletter_avancee_charger_dist ($id_newsletter='new
 
     include_spip('action/editer_liens');
 
-    $articles_lies = objet_trouver_liens(array('newsletter' => $id_newsletter), array('article' => '*'));
+    if ($id_newsletter !== 'new') {
+        $articles_lies = objet_trouver_liens(array('newsletter' => $id_newsletter), array('article' => '*'));
+    } else {
+        $articles_lies = array();
+    }
 
     $valeurs['selection_editoriale'] = array_map(function ($article) {
         return array(

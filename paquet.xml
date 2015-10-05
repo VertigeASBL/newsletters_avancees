@@ -1,7 +1,7 @@
 <paquet
   prefix="newsletters_avancees"
   categorie="edition"
-  version="0.1.0"
+  version="0.1.1"
   etat="dev"
   compatibilite="[3.0.17;3.0.*]"
   logo="prive/themes/spip/images/newsletters_avancees-64.png"

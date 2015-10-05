@@ -46,17 +46,22 @@ function formulaires_editer_newsletter_avancee_charger_dist ($id_newsletter='new
 
     include_spip('action/editer_liens');
 
-    if ($id_newsletter !== 'new') {
+    if (($id_newsletter !== 'new') && ($id_newsletter > 0)) {
         $articles_lies = objet_trouver_liens(array('newsletter' => $id_newsletter), array('article' => '*'));
-    } else {
-        $articles_lies = array();
-    }
+        $valeurs['selection_editoriale'] = array_map(function ($article) {
+            return array(
+                'article' => "article|" . $article['id_objet'],
+            );
+        }, $articles_lies);
 
-    $valeurs['selection_editoriale'] = array_map(function ($article) {
-        return array(
-            'article' => "article|" . $article['id_objet'],
-        );
-    }, $articles_lies);
+    } else {
+        $articles_lies = _request('selection_editoriale') ? _request('selection_editoriale') : array();
+
+        $valeurs['selection_editoriale'] = $articles_lies;
+        $valeurs['titre'] = _request('titre');
+        $valeurs['chapo'] = _request('chapo');
+        $valeurs['texte'] = _request('texte');
+    }
 
     return $valeurs;
 }
